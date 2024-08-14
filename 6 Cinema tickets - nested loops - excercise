@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String input = scanner.nextLine();
+        int ticketsSold = 0;
+
+        int kidTicket = 0;
+        int studentTickets = 0;
+        int standardTicket = 0;
+
+        while (!input.equals("Finish")) {
+            String movie = input;
+            int totalTickets = Integer.parseInt(scanner.nextLine());
+            int freeSpace = totalTickets;
+            int currentSeats = 0;
+
+
+            String command = scanner.nextLine();
+            while (!command.equals("End")) {
+                String ticketType = command;
+
+                if (ticketType.equals("kid")) {
+                    kidTicket++;
+                    freeSpace--;
+                    ticketsSold++;
+                    currentSeats ++;
+
+                } else if (ticketType.equals("standard")) {
+                    standardTicket++;
+                    freeSpace--;
+                    ticketsSold++;
+                    currentSeats ++;
+                } else if (ticketType.equals("student")) {
+                    studentTickets++;
+                    freeSpace--;
+                    ticketsSold++;
+                    currentSeats ++;
+
+                }
+
+
+                if (freeSpace == 0) {
+                    System.out.println(movie + " - 100.00% full.");
+                    break;
+                }
+                command = scanner.nextLine();
+                if (command.equals("End")) {
+                    System.out.printf("%s - %.2f%% full.%n", movie, (double) currentSeats / totalTickets * 100);
+                    break;
+                }
+            }
+
+
+            input = scanner.nextLine();
+        }
+
+        System.out.printf("Total tickets: %d%n", ticketsSold);
+        System.out.printf("%.2f%% student tickets.%n", (double) studentTickets / ticketsSold * 100);
+        System.out.printf("%.2f%% standard tickets.%n", (double) standardTicket / ticketsSold * 100);
+        System.out.printf("%.2f%% kids tickets.", (double) kidTicket / ticketsSold * 100);
+
+        System.out.println();
+    }
+}
